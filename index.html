@@ -6,30 +6,38 @@
 <title>Varble Orthodontics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --navy:       #132c4a;
+    --navy:       #0e2240;
+    --deep:       #132c4a;
     --blue:       #2563a8;
     --mid-blue:   #3b82c4;
     --light-blue: #5ba3d9;
     --sky:        #e8f1fa;
-    --pale:       #f0f6fc;
+    --pale:       #f4f8fc;
     --white:      #ffffff;
-    --gray-600:   #5b6577;
+    --gray-700:   #3d4a5c;
+    --gray-500:   #6b7a8d;
     --gray-400:   #9ca5b4;
     --gray-200:   #e2e6ed;
-    --border:     #d3e2f0;
+    --border:     rgba(19,44,74,0.08);
     --text:       #1a2b3f;
     --gold:       #f0a827;
-    --radius-sm:  10px;
-    --radius-md:  14px;
-    --radius-lg:  20px;
+    --gold-soft:  #fdf3dc;
+    --glass:      rgba(255,255,255,0.72);
+    --glass-border: rgba(255,255,255,0.35);
+    --glass-hover: rgba(255,255,255,0.88);
+    --radius-sm:  12px;
+    --radius-md:  16px;
+    --radius-lg:  22px;
+    --radius-xl:  28px;
+    --shadow-soft: 0 2px 8px rgba(14,34,64,0.06), 0 8px 32px rgba(14,34,64,0.08);
+    --shadow-lift: 0 4px 12px rgba(14,34,64,0.08), 0 12px 40px rgba(14,34,64,0.12);
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { -webkit-text-size-adjust: 100%; }
 
   body {
@@ -38,47 +46,91 @@
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  /* ── HERO BG ── */
+  /* ── HERO BACKGROUND ── */
   .hero-bg {
     position: fixed;
     top: 0; left: 0; right: 0;
-    height: 240px;
-    background: var(--navy);
+    height: 380px;
+    background: 
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(37,99,168,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(91,163,217,0.2) 0%, transparent 50%),
+      linear-gradient(170deg, #071428 0%, var(--navy) 30%, #1a3d6b 70%, #1e4470 100%);
     z-index: 0;
+  }
+
+  /* Smile curve SVG overlay */
+  .hero-curve {
+    position: fixed;
+    bottom: calc(100vh - 380px);
+    left: 0; right: 0;
+    z-index: 1;
+    line-height: 0;
+    pointer-events: none;
+  }
+  .hero-curve svg {
+    width: 100%;
+    height: 60px;
+    display: block;
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(60px);
+    opacity: 0.4;
+    animation: orbFloat 12s ease-in-out infinite alternate;
+  }
+  .orb-1 {
+    width: 200px; height: 200px;
+    background: rgba(59,130,196,0.3);
+    top: 40px; left: -60px;
+    animation-duration: 14s;
+  }
+  .orb-2 {
+    width: 160px; height: 160px;
+    background: rgba(91,163,217,0.25);
+    top: 100px; right: -40px;
+    animation-duration: 10s;
+    animation-delay: -4s;
+  }
+  @keyframes orbFloat {
+    from { transform: translateY(0) scale(1); }
+    to   { transform: translateY(-20px) scale(1.08); }
   }
 
   /* ── CONTAINER ── */
   .container {
-    max-width: 420px;
+    max-width: 440px;
     margin: 0 auto;
-    padding: 48px 18px 48px;
+    padding: 44px 18px 52px;
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
 
-  /* ── PROFILE SECTION ── */
+  /* ── PROFILE ── */
   .profile {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 24px;
   }
 
   .profile-avatar {
-    width: 72px;
-    height: 72px;
+    width: 82px;
+    height: 82px;
     border-radius: 50%;
-    margin: 0 auto 16px;
-    background: var(--navy);
-    border: 3px solid rgba(255,255,255,0.35);
+    margin: 0 auto 18px;
     overflow: hidden;
-    box-shadow:
-      0 4px 20px rgba(19,44,74,0.3),
-      0 0 0 5px rgba(255,255,255,0.08);
     position: relative;
+    box-shadow:
+      0 0 0 3px rgba(255,255,255,0.2),
+      0 0 0 6px rgba(59,130,196,0.15),
+      0 8px 32px rgba(0,0,0,0.25);
   }
-
   .profile-avatar img {
     width: 100%;
     height: 100%;
@@ -88,152 +140,148 @@
   }
 
   .profile-name {
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 25px;
-    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
     color: var(--white);
-    margin-bottom: 8px;
-    letter-spacing: 0.2px;
-    line-height: 1.2;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+    line-height: 1.15;
   }
 
   .profile-tagline {
-    font-size: 13px;
-    color: rgba(255,255,255,0.72);
-    line-height: 1.55;
-    max-width: 500px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.6;
+    max-width: 340px;
     margin: 0 auto;
     font-weight: 400;
     text-wrap: balance;
   }
 
-  /* ── SOCIAL ROW ── */
-  .social-row {
+  /* ── SOCIAL PILLS ── */
+  .social-bar {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-    margin-bottom: 14px;
+    gap: 6px;
+    margin: 22px 0 18px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50px;
+    padding: 6px 10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .social-icon {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    background: var(--white);
-    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 1px 4px rgba(19,44,74,0.06);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
   }
-
-  .social-icon:hover, .social-icon:active {
-    background: var(--sky);
-    border-color: var(--mid-blue);
+  .social-icon:hover {
+    background: rgba(255,255,255,0.15);
     transform: translateY(-2px);
-    box-shadow: 0 3px 10px rgba(19,44,74,0.1);
   }
-
   .social-icon svg {
-    width: 16px;
-    height: 16px;
-    fill: var(--navy);
-    opacity: 0.8;
-    transition: opacity 0.2s ease;
+    width: 16px; height: 16px;
+    fill: rgba(255,255,255,0.7);
+    transition: fill 0.2s ease;
   }
-
-  .social-icon:hover svg {
-    opacity: 1;
-  }
-
-  /* ── CARD BASE ── */
-  .card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 22px;
-    margin-bottom: 14px;
-    box-shadow:
-      0 1px 3px rgba(19,44,74,0.04),
-      0 4px 16px rgba(19,44,74,0.06);
-    border: 1px solid var(--border);
-  }
+  .social-icon:hover svg { fill: #fff; }
 
   /* ── PRIMARY CTA ── */
   .cta-card {
-    background:
-      radial-gradient(ellipse 90% 80% at 20% 90%, rgba(91,163,217,0.18) 0%, transparent 60%),
-      linear-gradient(145deg, var(--navy) 0%, #1e4470 45%, var(--blue) 100%);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 32px 26px 30px;
+    margin-bottom: 12px;
     text-align: center;
-    padding: 30px 24px 28px;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-soft);
   }
-
   .cta-card::before {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    background: rgba(91,163,217,0.1);
-    pointer-events: none;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--blue), var(--light-blue), var(--blue));
+    background-size: 200% 100%;
+    animation: shimmer 4s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
   .cta-eyebrow {
-    font-size: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
+    color: var(--mid-blue);
     margin-bottom: 8px;
-    font-weight: 600;
-  }
-
-  .cta-headline {
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 22px;
     font-weight: 700;
-    color: var(--white);
-    margin-bottom: 6px;
-    line-height: 1.25;
   }
-
+  .cta-headline {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
   .cta-sub {
-    font-size: 13px;
-    color: rgba(255,255,255,0.58);
+    font-size: 14px;
+    color: var(--gray-500);
     margin-bottom: 22px;
     line-height: 1.5;
   }
 
   .cta-btn {
-    display: inline-block;
-    padding: 14px 36px;
-    background: var(--white);
-    color: var(--navy);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 38px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    color: var(--white);
     border-radius: 50px;
+    font-family: 'Outfit', sans-serif;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 15px;
     text-decoration: none;
     letter-spacing: 0.2px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 20px rgba(14,34,64,0.25);
     position: relative;
   }
-
-  .cta-btn:hover, .cta-btn:active {
+  .cta-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 32px rgba(14,34,64,0.35);
+  }
+  .cta-btn-arrow {
+    transition: transform 0.3s ease;
+  }
+  .cta-btn:hover .cta-btn-arrow {
+    transform: translateX(3px);
   }
 
   /* ── LINK BUTTONS ── */
   .links-group {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 14px;
+    gap: 8px;
+    margin-bottom: 12px;
   }
 
   .link-btn {
@@ -241,157 +289,284 @@
     align-items: center;
     justify-content: space-between;
     padding: 14px 16px;
-    background: var(--white);
-    border: 1px solid var(--border);
+    background: var(--glass);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     text-decoration: none;
     color: var(--text);
     font-size: 14px;
     font-weight: 600;
-    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 1px 3px rgba(19,44,74,0.04);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 1px 4px rgba(14,34,64,0.04);
   }
-
-  .link-btn:hover, .link-btn:active {
-    border-color: var(--mid-blue);
-    background: var(--sky);
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(19,44,74,0.08);
+  .link-btn:hover {
+    background: var(--glass-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+    border-color: rgba(59,130,196,0.25);
   }
 
   .link-btn-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     min-width: 0;
   }
-
   .link-btn-icon {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--radius-sm);
-    background: var(--sky);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
+    font-size: 18px;
     flex-shrink: 0;
   }
+  .link-btn-icon.blue-icon {
+    background: linear-gradient(135deg, rgba(37,99,168,0.1), rgba(91,163,217,0.12));
+  }
+  .link-btn-icon.gold-icon {
+    background: linear-gradient(135deg, rgba(240,168,39,0.1), rgba(240,168,39,0.15));
+  }
+  .link-btn-icon.loc-icon {
+    background: linear-gradient(135deg, rgba(37,99,168,0.08), rgba(91,163,217,0.1));
+  }
 
-  .link-btn-left span {
+  .link-btn-text {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 14px;
+  }
+  .link-btn-sub {
+    font-size: 11px;
+    color: var(--gray-500);
+    font-weight: 400;
+    margin-top: 1px;
   }
 
   .link-btn-arrow {
     color: var(--mid-blue);
     flex-shrink: 0;
     margin-left: 8px;
-    opacity: 0.6;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    opacity: 0.4;
+    transition: all 0.3s ease;
   }
-
   .link-btn:hover .link-btn-arrow {
     opacity: 1;
-    transform: translateX(2px);
+    transform: translateX(3px);
   }
+  .link-btn-arrow svg { width: 16px; height: 16px; display: block; }
 
-  .link-btn-arrow svg {
-    width: 16px;
-    height: 16px;
-    display: block;
+  /* ── LOCATIONS SPLIT ── */
+  .locations-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
   }
-
-  /* ── SECTION LABEL ── */
-  .section-label {
-    font-size: 10px;
+  .loc-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 14px 18px;
+    background: var(--glass);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 1px 4px rgba(14,34,64,0.04);
+  }
+  .loc-card:hover {
+    background: var(--glass-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+    border-color: rgba(59,130,196,0.25);
+  }
+  .loc-pin {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 10px rgba(14,34,64,0.15);
+  }
+  .loc-pin svg {
+    width: 16px; height: 16px; fill: #fff;
+  }
+  .loc-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 14px;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .loc-sub {
+    font-size: 11px;
+    color: var(--gray-500);
+    font-weight: 400;
+  }
+
+  /* ── REVIEWS MARQUEE ── */
+  .reviews-section {
+    margin-bottom: 12px;
+  }
+  .reviews-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 0 4px;
+  }
+  .reviews-label {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-
-  .g-badge {
+  .reviews-label-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray-700);
+    letter-spacing: 0.2px;
+  }
+  .reviews-stars-badge {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: var(--sky);
+    background: var(--gold-soft);
     border-radius: 20px;
-    padding: 3px 9px;
-    font-size: 10px;
+    padding: 4px 10px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .g-icon {
+    display: flex;
+    align-items: center;
+  }
+  .g-icon svg { width: 14px; height: 14px; }
+
+  .reviews-link {
+    font-size: 12px;
     font-weight: 600;
-    color: var(--gray-600);
-    letter-spacing: 0;
-    text-transform: none;
+    color: var(--mid-blue);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .reviews-link:hover { color: var(--navy); }
+
+  /* Marquee */
+  .marquee-track {
+    display: flex;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+  .marquee-inner {
+    display: flex;
+    gap: 12px;
+    animation: marqueeScroll 35s linear infinite;
+    will-change: transform;
+  }
+  .marquee-inner:hover {
+    animation-play-state: paused;
+  }
+  @keyframes marqueeScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
-  /* ── REVIEWS ── */
-  .review-item {
-    padding: 14px 0;
-    border-bottom: 1px solid var(--gray-200);
+  .review-card {
+    flex-shrink: 0;
+    width: 280px;
+    background: var(--white);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 18px 18px 16px;
+    box-shadow: 0 1px 4px rgba(14,34,64,0.04);
   }
-
-  .review-item:last-of-type { border-bottom: none; padding-bottom: 0; }
-  .review-item:first-of-type { padding-top: 2px; }
-
   .review-stars {
     color: var(--gold);
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    margin-bottom: 6px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
   }
-
   .review-text {
     font-size: 13px;
     line-height: 1.6;
     color: var(--text);
-    margin-bottom: 8px;
-    font-style: italic;
-    opacity: 0.88;
+    opacity: 0.85;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
-
   .review-author {
+    font-family: 'Outfit', sans-serif;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--gray-400);
     letter-spacing: 0.3px;
+    text-transform: uppercase;
   }
 
-  .review-cta {
-    display: block;
-    text-align: center;
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px solid var(--gray-200);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--blue);
-    text-decoration: none;
+  /* ── TRUST STRIP ── */
+  .trust-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 16px 0;
+    margin-bottom: 12px;
+  }
+  .trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+  .trust-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .trust-label {
+    font-size: 10px;
+    color: var(--gray-500);
+    font-weight: 500;
     letter-spacing: 0.3px;
-    transition: color 0.2s ease;
+    text-align: center;
   }
-
-  .review-cta:hover { color: var(--navy); }
+  .trust-divider {
+    width: 1px;
+    height: 28px;
+    background: var(--gray-200);
+  }
 
   /* ── FOOTER ── */
   .footer {
     text-align: center;
-    padding: 20px 0 8px;
+    padding: 18px 0 4px;
   }
-
   .footer-brand {
     font-size: 10px;
     color: var(--gray-400);
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
-
   .footer-posted {
     display: inline-flex;
     align-items: center;
@@ -400,18 +575,13 @@
     text-decoration: none;
     perspective: 400px;
   }
-
   .footer-posted-text {
     font-size: 11px;
     font-weight: 600;
-    color: var(--text);
+    color: var(--gray-500);
     letter-spacing: 0.2px;
   }
-
-  .footer-posted-highlight {
-    color: #ffd100;
-  }
-
+  .footer-posted-highlight { color: #ffd100; }
   .footer-posted-logo {
     height: 16px;
     width: auto;
@@ -421,43 +591,62 @@
     transform-origin: center;
     transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
-
   .footer-posted:hover .footer-posted-logo {
     opacity: 1;
     transform: rotateY(0deg);
   }
 
-  /* ── ANIMATIONS ── */
+  /* ── ENTRANCE ANIMATIONS ── */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
+  @keyframes fadeScale {
+    from { opacity: 0; transform: scale(0.92) translateY(12px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
   .anim {
-    animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     opacity: 0;
   }
+  .anim-scale {
+    animation: fadeScale 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.12s; }
+  .d3 { animation-delay: 0.2s; }
+  .d4 { animation-delay: 0.28s; }
+  .d5 { animation-delay: 0.36s; }
+  .d6 { animation-delay: 0.44s; }
+  .d7 { animation-delay: 0.52s; }
+  .d8 { animation-delay: 0.58s; }
 
-  .d1 { animation-delay: 0.04s; }
-  .d2 { animation-delay: 0.1s; }
-  .d3 { animation-delay: 0.16s; }
-  .d4 { animation-delay: 0.22s; }
-  .d5 { animation-delay: 0.28s; }
-  .d6 { animation-delay: 0.34s; }
-
-  /* ── RESPONSIVE SAFEGUARDS ── */
+  /* ── RESPONSIVE ── */
   @media (max-width: 380px) {
-    .container { padding: 44px 14px 40px; }
-    .cta-card { padding: 26px 18px 24px; }
-    .profile-name { font-size: 22px; }
-    .link-btn { padding: 12px 14px; }
-    .link-btn-left span { font-size: 13px; }
+    .container { padding: 40px 14px 44px; }
+    .profile-name { font-size: 24px; }
+    .cta-card { padding: 26px 20px 24px; }
+    .cta-headline { font-size: 21px; }
+    .locations-row { gap: 6px; }
+    .loc-card { padding: 16px 10px 14px; }
+    .review-card { width: 260px; }
   }
 </style>
 </head>
 <body>
 
+<!-- Background -->
 <div class="hero-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- Smile curve transition -->
+<div class="hero-curve">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 C360,55 1080,55 1440,0 L1440,60 L0,60 Z" fill="var(--pale)"/>
+  </svg>
+</div>
 
 <div class="container">
 
@@ -467,12 +656,11 @@
       <img src="https://assets.cdn.filesafe.space/NchMBuPj77FSNeXz3SYz/media/69c2eaa60e98210bf5ba2097.jpg" alt="Varble Orthodontics" loading="eager">
     </div>
     <div class="profile-name">Varble Orthodontics</div>
-    <div class="profile-tagline">Orthodontic care that's thoughtfully planned, carefully timed, and designed to fit your family's life.</div>
-
+    <div class="profile-tagline">Thoughtfully planned, carefully timed orthodontic care designed to fit your family's life.</div>
   </div>
 
-  <!-- SOCIAL ICONS -->
-  <div class="social-row anim d2">
+  <!-- SOCIAL -->
+  <div class="social-bar anim d2">
     <a href="https://www.instagram.com/varbleorthodontics/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
       <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
     </a>
@@ -491,76 +679,139 @@
   </div>
 
   <!-- PRIMARY CTA -->
-  <div class="card cta-card anim d3">
-    <div class="cta-eyebrow">New Patient Special</div>
-    <div class="cta-headline">Book Your Free Exam</div>
-    <div class="cta-sub">No obligation. Just a conversation about your smile.</div>
-    <a href="https://varbleorthodontics.com/lp/free-consult/" target="_blank" rel="noopener" class="cta-btn">Schedule Now →</a>
+  <div class="cta-card anim-scale d3">
+    <div class="cta-eyebrow">Free Consultation</div>
+    <div class="cta-headline">Book Your Smile Assessment</div>
+    <div class="cta-sub">No obligation — just a conversation about your smile.</div>
+    <a href="https://varbleorthodontics.com/lp/free-consult/" target="_blank" rel="noopener" class="cta-btn">
+      Schedule Now
+      <span class="cta-btn-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip anim d4">
+    <div class="trust-item">
+      <div class="trust-num">18+</div>
+      <div class="trust-label">Years Experience</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <div class="trust-num">4.9★</div>
+      <div class="trust-label">Google Rating</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <div class="trust-num">2</div>
+      <div class="trust-label">STL Locations</div>
+    </div>
   </div>
 
   <!-- LINKS -->
-  <div class="links-group anim d4">
+  <div class="links-group anim d5">
     <a href="https://varbleorthodontics.com/" target="_blank" rel="noopener" class="link-btn">
       <div class="link-btn-left">
-        <div class="link-btn-icon">🦷</div>
-        <span>Our Services & Treatment Options</span>
+        <div class="link-btn-icon blue-icon">🦷</div>
+        <div>
+          <div class="link-btn-text">Treatment Options</div>
+          <div class="link-btn-sub">Braces, clear aligners &amp; more</div>
+        </div>
       </div>
       <span class="link-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
     </a>
     <a href="https://varbleorthodontics.com/patient-resources/#financial-info" target="_blank" rel="noopener" class="link-btn">
       <div class="link-btn-left">
-        <div class="link-btn-icon">💰</div>
-        <span>Flexible Payment & Financing</span>
-      </div>
-      <span class="link-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-    </a>
-    <a href="https://varbleorthodontics.com/location/orthodontist-in-creve-coeur-mo/" target="_blank" rel="noopener" class="link-btn">
-      <div class="link-btn-left">
-        <div class="link-btn-icon">📍</div>
-        <span>Our Creve Coeur Location</span>
-      </div>
-      <span class="link-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-    </a>
-    <a href="https://varbleorthodontics.com/location/orthodontist-in-st-peters-mo/" target="_blank" rel="noopener" class="link-btn">
-      <div class="link-btn-left">
-        <div class="link-btn-icon">📍</div>
-        <span>Our St. Peters Location</span>
+        <div class="link-btn-icon gold-icon">💰</div>
+        <div>
+          <div class="link-btn-text">Payment &amp; Financing</div>
+          <div class="link-btn-sub">Flexible plans that work for your family</div>
+        </div>
       </div>
       <span class="link-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
     </a>
   </div>
 
-  <!-- REVIEWS -->
-  <div class="card anim d5">
-    <div class="section-label">
-      What Families Are Saying
-      <span class="g-badge">
-        <svg width="10" height="10" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        Google Reviews
-      </span>
+  <!-- LOCATIONS -->
+  <div class="locations-row anim d5">
+    <a href="https://varbleorthodontics.com/location/orthodontist-in-creve-coeur-mo/" target="_blank" rel="noopener" class="loc-card">
+      <div class="loc-pin">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+      </div>
+      <div class="loc-name">Creve Coeur</div>
+      <div class="loc-sub">West County</div>
+    </a>
+    <a href="https://varbleorthodontics.com/location/orthodontist-in-st-peters-mo/" target="_blank" rel="noopener" class="loc-card">
+      <div class="loc-pin">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+      </div>
+      <div class="loc-name">St. Peters</div>
+      <div class="loc-sub">St. Charles County</div>
+    </a>
+  </div>
+
+  <!-- REVIEWS MARQUEE -->
+  <div class="reviews-section anim d6">
+    <div class="reviews-header">
+      <div class="reviews-label">
+        <div class="g-icon">
+          <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        </div>
+        <span class="reviews-label-text">Google Reviews</span>
+        <span class="reviews-stars-badge">★ 4.9</span>
+      </div>
+      <a href="https://share.google/qbfHXCSXjuizqXtCU" target="_blank" rel="noopener" class="reviews-link">See all →</a>
     </div>
 
-    <div class="review-item">
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Varble Orthodontics is truly the best! Dr. Varble is a great communicator, wonderful with kids, and the technology is top-notch. I highly recommend Varble Orthodontics."</div>
-      <div class="review-author">— Kristen</div>
+    <div class="marquee-track">
+      <div class="marquee-inner" id="marquee">
+        <!-- Set 1 -->
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Varble Orthodontics is truly the best! Dr. Varble is a great communicator, wonderful with kids, and the technology is top-notch. I highly recommend Varble Orthodontics."</div>
+          <div class="review-author">— Kristen</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Used Varble Orthodontics for three kids. Always a great experience — friendly staff, easy to work with, and great follow-up all the way through. Made the kids feel comfortable at every step."</div>
+          <div class="review-author">— Google Reviewer</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"My son comes in asking when he can go back — it's like going to the park for him. Everyone is incredibly friendly, they worked with us on a payment plan, and even called to check on us afterward."</div>
+          <div class="review-author">— Google Reviewer</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"From the initial consultation to the final result, the entire experience was seamless. Dr. Varble took the time to explain the whole process and made my daughter feel right at home."</div>
+          <div class="review-author">— Google Reviewer</div>
+        </div>
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Varble Orthodontics is truly the best! Dr. Varble is a great communicator, wonderful with kids, and the technology is top-notch. I highly recommend Varble Orthodontics."</div>
+          <div class="review-author">— Kristen</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Used Varble Orthodontics for three kids. Always a great experience — friendly staff, easy to work with, and great follow-up all the way through. Made the kids feel comfortable at every step."</div>
+          <div class="review-author">— Google Reviewer</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"My son comes in asking when he can go back — it's like going to the park for him. Everyone is incredibly friendly, they worked with us on a payment plan, and even called to check on us afterward."</div>
+          <div class="review-author">— Google Reviewer</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"From the initial consultation to the final result, the entire experience was seamless. Dr. Varble took the time to explain the whole process and made my daughter feel right at home."</div>
+          <div class="review-author">— Google Reviewer</div>
+        </div>
+      </div>
     </div>
-    <div class="review-item">
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Used Varble Orthodontics for three kids. Always a great experience — friendly staff, easy to work with, and great follow-up all the way through. Made the kids feel comfortable at every step."</div>
-      <div class="review-author">— Google Reviewer</div>
-    </div>
-    <div class="review-item">
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"My son comes in asking when he can go back — it's like going to the park for him. Everyone is incredibly friendly, they worked with us on a payment plan, and even called to check on us afterward."</div>
-      <div class="review-author">— Google Reviewer</div>
-    </div>
-
-    <a href="https://share.google/qbfHXCSXjuizqXtCU" target="_blank" rel="noopener" class="review-cta">Read more reviews →</a>
   </div>
 
   <!-- FOOTER -->
-  <div class="footer anim d6">
+  <div class="footer anim d8">
     <div class="footer-brand">Varble Orthodontics · varbleorthodontics.com</div>
     <a href="https://posted-social.com" target="_blank" rel="noopener" class="footer-posted">
       <span class="footer-posted-text">We'll Keep You <span class="footer-posted-highlight">Posted</span></span>
@@ -569,5 +820,6 @@
   </div>
 
 </div>
+
 </body>
 </html>
